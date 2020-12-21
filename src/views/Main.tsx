@@ -4,7 +4,7 @@ export default defineComponent({
   name: 'Main',
   render() {
     return (
-      <div class="main">
+      <div class='main'>
         main
       </div>
     );

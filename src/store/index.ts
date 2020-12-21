@@ -1,12 +1,19 @@
-import { createStore } from 'vuex'
+import { createStore } from 'vuex';
 
 export default createStore({
-  state: {
+  state: {},
+  getters: {
+    isLogin() {
+      return true;
+    },
+    userName() {
+      return 'admin';
+    },
+    userId() {
+      return 'admin';
+    }
   },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
-})
+  mutations: {},
+  actions: {},
+  modules: {}
+});

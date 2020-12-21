@@ -1,14 +1,15 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
 
-const PageWrapper = () => import(/* webpackChunkName: "pageWrapper" */'@/components/PageWrapper')
+const PageWrapper = () => import(/* webpackChunkName: "pageWrapper" */'@/components/PageWrapper');
+
+const Login = () => import(/* webpackChunkName: "login" */'@/views/user/Login');
 
 const Main = () => import(/* webpackChunkName: "main" */'@/views/Main');
 
 const Err404 = () => import(/* webpackChunkName: "error" */'@/views/error/404');
-const routes: Array<RouteRecordRaw> = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/idx',
-    name: 'mainIdx',
     component: PageWrapper,
     redirect: '/main',
     children: [
@@ -25,12 +26,17 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
     path: '/:w*',
     redirect: '/404'
   }
 ];
 
-const router = createRouter({
+export const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 });
