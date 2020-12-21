@@ -1,18 +1,28 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
+
+const PageWrapper = () => import(/* webpackChunkName: "pageWrapper" */'@/components/PageWrapper')
 
 const Main = () => import(/* webpackChunkName: "main" */'@/views/Main');
 
 const Err404 = () => import(/* webpackChunkName: "error" */'@/views/error/404');
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/main',
-    name: 'Main',
-    component: Main
-  },
-  {
-    path: '/404',
-    name: '404',
-    component: Err404
+    path: '/idx',
+    name: 'mainIdx',
+    component: PageWrapper,
+    redirect: '/main',
+    children: [
+      {
+        path: '/main',
+        name: 'Main',
+        component: Main
+      },
+      {
+        path: '/404',
+        name: '404',
+        component: Err404
+      }
+    ]
   },
   {
     path: '/:w*',

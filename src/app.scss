@@ -1,42 +1,5 @@
-@import './variables';
-
 #app {
   font-family: "PingFang SC", Avenir, Helvetica, Arial, sans-serif;
   color: $baseFontColor;
 }
 
-.app-container {
-  .fixed-sider {
-    position: fixed;
-    left: 0;
-    height: 100vh;
-    overflow: auto;
-
-    .logo {
-      margin: $baseMargin auto;
-      width: $baseFontSize * 2;
-      height: $baseFontSize * 2;
-      background: url("./assets/logo.png") 0 0 no-repeat;
-      background-size: cover;
-    }
-  }
-
-  .fixed-left {
-    margin-left: 200px;
-
-    .app-header {
-      background-color: #fff;
-    }
-
-    .app-content {
-      margin: 24px 16px 24px;
-      height: calc(100vh - 64px - 48px - 70px);
-      background-color: #fff;
-      overflow: initial;
-    }
-
-    .app-footer {
-      background-color: #fff;
-    }
-  }
-}

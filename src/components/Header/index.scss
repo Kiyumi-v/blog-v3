@@ -1,0 +1,27 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .left-wrapper {
+  }
+
+  .right-wrapper {
+    .user {
+      padding: 0 $basePadding;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      .avatar {
+        margin-right: $baseMargin;
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, .025);
+      }
+    }
+  }
+}

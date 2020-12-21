@@ -1,0 +1,42 @@
+.app-wrapper {
+  .fixed-sider {
+    position: fixed;
+    left: 0;
+    height: 100vh;
+    overflow: auto;
+
+    .logo {
+      margin: $baseMargin auto;
+      width: $baseFontSize * 2;
+      height: $baseFontSize * 2;
+      //background: url("./src/assets/logo.png") 0 0 no-repeat;
+      background-size: cover;
+    }
+  }
+
+  .fixed-right {
+    margin-left: 200px;
+    transition: all .3s;
+
+    &.collapsed {
+      margin-left: 80px;
+    }
+
+    .app-layout-header {
+      padding: 0 $basePadding * 2;
+      background-color: #fff;
+    }
+
+    .app-layout-content {
+      margin: 24px 16px 24px;
+      height: calc(100vh - 64px - 48px - 70px);
+      background-color: #fff;
+      overflow: initial;
+    }
+
+    .app-layout-footer {
+      padding: 0 $basePadding * 2;
+      background-color: #fff;
+    }
+  }
+}
