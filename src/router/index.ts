@@ -2,7 +2,7 @@ import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
 
 const PageWrapper = () => import(/* webpackChunkName: "pageWrapper" */'@/components/PageWrapper');
 
-const Login = () => import(/* webpackChunkName: "login" */'@/views/user/Login');
+const Login = () => import(/* webpackChunkName: "login" */'@/views/user/Login/index');
 
 const Main = () => import(/* webpackChunkName: "main" */'@/views/Main');
 

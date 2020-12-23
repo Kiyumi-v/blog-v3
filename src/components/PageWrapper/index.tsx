@@ -6,7 +6,7 @@ import './index.scss'
 
 export default defineComponent({
   name: "PageWrapper",
-  setup(){
+  setup() {
     const selectedKeys = reactive(['1']);
     const collapsed = ref(false);
     const onMenuItemClick = (item: any) => {
@@ -23,7 +23,7 @@ export default defineComponent({
       onMenuCollapse
     };
   },
-  render(){
+  render() {
     return (
       <div class="app-wrapper">
         <a-layout>
