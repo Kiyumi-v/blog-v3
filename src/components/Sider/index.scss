@@ -1,0 +1,11 @@
+.app-sider {
+  width: 100%;
+
+  > .logo {
+    margin: $baseMargin auto;
+    width: $baseFontSize * 2;
+    height: $baseFontSize * 2;
+    background: url("~@/assets/logo.png") 0 0 no-repeat;
+    background-size: cover;
+  }
+}

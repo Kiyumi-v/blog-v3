@@ -1,12 +1,12 @@
-import {createStore} from 'vuex';
+import { createStore } from 'vuex';
 import user from './modules/user';
 import menu from './modules/menu';
 
 export default createStore({
   state: {},
   getters: {
-    isLogin() {
-      return true;
+    isLogin(state, getters) {
+      return getters['user/isLogin'];
     },
     userName() {
       return 'admin';

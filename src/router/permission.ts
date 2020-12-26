@@ -1,12 +1,14 @@
 import { Router, RouteLocationNormalized, RouteRecordRaw } from 'vue-router';
 import { SYNC_ROUTES, asyncRoutes } from '@/router';
+import whiteList from '@/router/whiteList';
 import store from '@/store';
 
 const auth = (to: RouteLocationNormalized, from: RouteLocationNormalized) => {
   let path = '';
   const { meta = {} } = to;
   const { allows = [] } = meta;
-  if (!store.getters.isLogin) {
+  if (whiteList.has(to.path)) {
+  } else if (!store.getters.isLogin) {
     path = '/login';
   } else if (allows.length && !allows.includes(from.name)) {
     path = '/403';

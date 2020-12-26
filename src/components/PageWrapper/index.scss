@@ -4,14 +4,6 @@
     left: 0;
     height: 100vh;
     overflow: auto;
-
-    .logo {
-      margin: $baseMargin auto;
-      width: $baseFontSize * 2;
-      height: $baseFontSize * 2;
-      background: url("~@/assets/logo.png") 0 0 no-repeat;
-      background-size: cover;
-    }
   }
 
   .fixed-right {

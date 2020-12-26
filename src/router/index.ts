@@ -16,8 +16,7 @@ export const SYNC_ROUTES: RouteRecordRaw[] = [
     component: PageWrapper,
     redirect: '/main',
     meta: {
-      hidden: true,
-      hideInBreadcrumb: true
+      title: '首页'
     },
     children: [
       {
@@ -25,7 +24,8 @@ export const SYNC_ROUTES: RouteRecordRaw[] = [
         name: 'Main',
         component: Main,
         meta: {
-          title: '首页'
+          title: '首页',
+          hidden: true
         }
       },
       {
