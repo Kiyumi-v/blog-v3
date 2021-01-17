@@ -1,4 +1,5 @@
 import { defineComponent, ref, reactive, computed } from 'vue';
+import { useForm } from '@ant-design-vue/use';
 import { UserOutlined, LockOutlined, MobileOutlined, MailOutlined } from '@ant-design/icons-vue';
 import classnames from 'classnames';
 import './index.scss';
@@ -15,33 +16,23 @@ export default defineComponent({
     });
     const rules = reactive({
       userName: [
-        {
-          required: true,
-          message: '请输入用户名'
-        }
+        { required: true, message: '请输入用户名' }
       ],
       password: [
-        {
-          required: true,
-          message: '请输入密码'
-        }
+        { required: true, message: '请输入密码' }
       ],
       code: []
     });
-    let form = {
-      validate() {
-      }
-    };
+    const { validate, validateInfos, resetFields } = useForm(model, rules);
     const onSubmit = () => {
-      console.dir(form);
-      form.validate();
+      validate();
     };
-    const setForm = (e: any) => form = e;
     const isAccount = computed(() => type.value === 'account');
     const isCeilPhone = computed(() => type.value === 'ceilPhone');
     const changeType = (_type: string) => {
       return () => {
         type.value = _type;
+        resetFields();
       };
     };
     const changeValue = (e: any, prop: 'userName' | 'password' | 'phone' | 'code') => {
@@ -50,7 +41,7 @@ export default defineComponent({
     return {
       type,
       model,
-      setForm,
+      validateInfos,
       onSubmit,
       changeType,
       changeValue,
@@ -101,8 +92,6 @@ export default defineComponent({
               </div>
             </div>
             <a-form
-              value={ this.model }
-              ref={ this.setForm }
               wrapperCol={ { span: 24 } }
             >
               <div class='login-form-container'>
@@ -110,15 +99,15 @@ export default defineComponent({
                   this.type === 'account'
                     ? (
                       <>
-                        <a-form-item required>
+                        <a-form-item required {...this.validateInfos.userName}>
                           <a-input
                             value={ this.model.userName }
                             size='large'
                             v-slots={ slots.userName }
-                            onChange={ (e: InputEvent) => this.changeValue(e, 'userName') }
+                            onChange={ (e: any) => this.changeValue(e, 'userName') }
                           />
                         </a-form-item>
-                        <a-form-item required>
+                        <a-form-item required {...this.validateInfos.password}>
                           <a-input
                             value={ this.model.password }
                             type='password'
@@ -136,7 +125,7 @@ export default defineComponent({
                             value={ this.model.phone }
                             size='large'
                             v-slots={ slots.phone }
-                            onChange={ (e: InputEvent) => this.changeValue(e, 'phone') }
+                            onChange={ (e: any) => this.changeValue(e, 'phone') }
                           />
                         </a-form-item>
                         <a-form-item required>
