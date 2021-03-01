@@ -1,12 +1,17 @@
 import { defineComponent, ref, reactive, computed } from 'vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 import { useForm } from '@ant-design-vue/use';
 import { UserOutlined, LockOutlined, MobileOutlined, MailOutlined } from '@ant-design/icons-vue';
+import Logo from '@/assets/logo.png';
 import classnames from 'classnames';
 import './index.scss';
 
 export default defineComponent({
   name: 'Login',
   setup() {
+    const store = useStore();
+    const router = useRouter();
     const type = ref('account');
     const model = reactive({
       userName: '',
@@ -14,31 +19,50 @@ export default defineComponent({
       phone: '',
       code: ''
     });
-    const rules = reactive({
+    const accountRules = reactive({
       userName: [
-        { required: true, message: '请输入用户名' }
+        { required: true, message: '请输入用户名', trigger: 'manual' }
       ],
       password: [
-        { required: true, message: '请输入密码' }
-      ],
-      code: []
+        { required: true, message: '请输入密码', trigger: 'manual' }
+      ]
     });
-    const { validate, validateInfos, resetFields } = useForm(model, rules);
-    const onSubmit = () => {
-      validate();
-    };
+    const ceilRules = reactive({
+      phone: [
+        { required: true, message: '请输入手机号', trigger: 'manual' }
+      ],
+      code: [
+        { required: true, message: '请输入验证码', trigger: 'manual' }
+      ]
+    });
     const isAccount = computed(() => type.value === 'account');
     const isCeilPhone = computed(() => type.value === 'ceilPhone');
+    const accountForm = useForm(model, accountRules);
+    const ceilForm = useForm(model, ceilRules);
+    const validate = () => isAccount.value ? accountForm.validate() : ceilForm.validate();
+    const validateInfos = (type: string) => type === 'account' ? accountForm.validateInfos : ceilForm.validateInfos;
+    const resetFields = () => isAccount.value ? accountForm.resetFields() : ceilForm.resetFields();
+
+    const onSubmit = () => {
+      validate()
+        .then(res => {
+          console.log(res);
+          store.commit('user/setUser', { userName: 'test', userId: 1 });
+          router.push('/main');
+        });
+    };
     const changeType = (_type: string) => {
       return () => {
-        type.value = _type;
         resetFields();
+        type.value = _type;
       };
     };
     const changeValue = (e: any, prop: 'userName' | 'password' | 'phone' | 'code') => {
       model[prop] = e.target.value;
     };
     return {
+      labelCol: { span: 2 },
+      wrapperCol: { span: 22 },
       type,
       model,
       validateInfos,
@@ -69,7 +93,7 @@ export default defineComponent({
         <div class='login-wrapper'>
           <div class='login-wrapper-title'>
             <div class='login-wrapper-title-content'>
-              <img class='title-logo' src='../../../assets/logo.png' alt='' />
+              <img class='title-logo' src={ Logo } alt='' />
               <span>Ant Design</span>
             </div>
             <div class='login-wrapper-title-subtitle'>
@@ -92,48 +116,54 @@ export default defineComponent({
               </div>
             </div>
             <a-form
-              wrapperCol={ { span: 24 } }
+              labelCol={ this.labelCol }
+              wrapperCol={ this.wrapperCol }
+              colon={ false }
             >
               <div class='login-form-container'>
                 {
                   this.type === 'account'
                     ? (
                       <>
-                        <a-form-item required {...this.validateInfos.userName}>
+                        <a-form-item label=' ' required { ...this.validateInfos('account').userName }>
                           <a-input
                             value={ this.model.userName }
                             size='large'
                             v-slots={ slots.userName }
                             onChange={ (e: any) => this.changeValue(e, 'userName') }
+                            placeholder='请输入用户名'
                           />
                         </a-form-item>
-                        <a-form-item required {...this.validateInfos.password}>
+                        <a-form-item label=' ' required { ...this.validateInfos('account').password }>
                           <a-input
                             value={ this.model.password }
                             type='password'
                             size='large'
                             v-slots={ slots.password }
                             onChange={ (e: any) => this.changeValue(e, 'password') }
+                            placeholder='请输入密码'
                           />
                         </a-form-item>
                       </>
                     )
                     : (
                       <>
-                        <a-form-item required>
+                        <a-form-item label=' ' required { ...this.validateInfos('ceilPhone').phone }>
                           <a-input
                             value={ this.model.phone }
                             size='large'
                             v-slots={ slots.phone }
                             onChange={ (e: any) => this.changeValue(e, 'phone') }
+                            placeholder='请输入手机号'
                           />
                         </a-form-item>
-                        <a-form-item required>
+                        <a-form-item label=' ' required { ...this.validateInfos('ceilPhone').code }>
                           <a-input
                             value={ this.model.code }
                             size='large'
                             v-slots={ slots.code }
                             onChange={ (e: any) => this.changeValue(e, 'code') }
+                            placeholder='请输入密码'
                           />
                         </a-form-item>
                       </>

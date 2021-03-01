@@ -7,9 +7,9 @@ export default defineComponent({
     const router = useRouter();
     const onClick = () => router.push('/main');
     return () => (
-      <div class="error-404">
+      <div class='error-404'>
         404
-        <a-button type="primary" onClick={ onClick }>回到首页</a-button>
+        <a-button type='primary' onClick={ onClick }>回到首页</a-button>
       </div>
     );
   }

@@ -7,7 +7,7 @@ export default defineComponent({
   },
   render() {
     return (
-      <div class="content-wrapper"></div>
+      <div class='content-wrapper'></div>
     );
   }
 });

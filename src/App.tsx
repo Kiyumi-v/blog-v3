@@ -1,4 +1,4 @@
-import {defineComponent} from 'vue';
+import { defineComponent } from 'vue';
 import './app.scss';
 
 export default defineComponent({
@@ -7,8 +7,8 @@ export default defineComponent({
   },
   render() {
     return (
-      <div class="app">
-        <router-view/>
+      <div class='app'>
+        <router-view />
       </div>
     );
   }

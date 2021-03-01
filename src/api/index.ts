@@ -1,4 +1,4 @@
-import {ILogin} from '@/interface/login';
+import { ILogin } from '@/interface/login';
 
 export function login(params: ILogin) {
   console.log(params);

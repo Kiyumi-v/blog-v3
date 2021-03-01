@@ -1,10 +1,10 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: "Footer",
+  name: 'Footer',
   render() {
     return (
-      <div class="app-footer">
+      <div class='app-footer'>
         footer
       </div>
     );
