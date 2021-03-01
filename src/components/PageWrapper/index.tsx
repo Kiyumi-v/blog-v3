@@ -8,19 +8,12 @@ import './index.scss';
 export default defineComponent({
   name: 'PageWrapper',
   setup() {
-    const selectedKeys = reactive(['1']);
     const collapsed = ref(false);
-    const onMenuItemClick = (item: any) => {
-      const { key } = item;
-      selectedKeys[0] = key;
-    };
     const onMenuCollapse = () => {
       collapsed.value = !collapsed.value;
     };
     return {
-      selectedKeys,
       collapsed,
-      onMenuItemClick,
       onMenuCollapse
     };
   },
@@ -34,20 +27,7 @@ export default defineComponent({
             collapsible={ true }
             trigger={ null }
           >
-            <Sider />
-            <a-menu
-              theme='dark'
-              mode='inline'
-              selectedKeys={ this.selectedKeys }
-              onClick={ this.onMenuItemClick }
-            >
-              <a-menu-item key='1'>
-                nav 1
-              </a-menu-item>
-              <a-menu-item key='2'>
-                nav 2
-              </a-menu-item>
-            </a-menu>
+            <Sider collapsed={ this.collapsed } />
           </a-layout-sider>
           <a-layout class={ classnames('fixed-right', this.collapsed ? 'collapsed' : '') }>
             <a-layout-header class='app-layout-header'>

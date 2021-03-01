@@ -34,18 +34,26 @@ const menuFilter: (menu: RouteRecordRaw[], menus: string[]) => RouteRecordRaw[]
 
 export default function permission(router: Router) {
   store.commit('menu/setSyncMenu', SYNC_ROUTES);
+  let requested = false;
   router.beforeEach(async (to, from, next) => {
     const path: string = await auth(to, from);
     if (path) {
       next(path);
     } else {
-      const menus = await getMenus();
-      const filteredMenus = menuFilter(asyncRoutes, menus);
-      filteredMenus.forEach((route) => {
-        router.addRoute(route);
-      });
-      store.commit('menu/setAsyncMenu', filteredMenus);
-      console.log(filteredMenus);
+      if (!requested) {
+        debugger;
+
+        const menus = await getMenus();
+        const filteredMenus = menuFilter(asyncRoutes, menus);
+        filteredMenus.forEach((route) => {
+          router.addRoute(route);
+        });
+        console.log(router);
+        debugger;
+        store.commit('menu/setAsyncMenu', filteredMenus);
+        console.log(filteredMenus);
+        requested = true;
+      }
       next();
     }
   });
