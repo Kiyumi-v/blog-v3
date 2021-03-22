@@ -169,14 +169,18 @@ export default defineComponent({
                       </>
                     )
                 }
-                <a-button
-                  class='login-form-confirm-btn'
-                  type='primary'
-                  size='large'
-                  onClick={ this.onSubmit }
-                >
-                  确定
-                </a-button>
+                <a-row>
+                  <a-col {...this.wrapperCol} push={this.labelCol.span}>
+                    <a-button
+                      class='login-form-confirm-btn test'
+                      type='primary'
+                      size='large'
+                      onClick={ this.onSubmit }
+                    >
+                      确定
+                    </a-button>
+                  </a-col>
+                </a-row>
               </div>
             </a-form>
           </div>
